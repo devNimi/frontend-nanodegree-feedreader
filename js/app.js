@@ -120,6 +120,7 @@ $(function() {
         var item = $(this);
 
         $('body').addClass('menu-hidden');
+        // http://api.jquery.com/jquery.data/
         loadFeed(item.data('id'));
         return false;
     });
