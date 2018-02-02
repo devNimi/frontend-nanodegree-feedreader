@@ -44,6 +44,13 @@ function init() {
      var feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
+    // following actions needs to happen each time a feed is loaded or changed
+    // Animate loader back to screen
+    $(".se-pre-con").fadeIn("400");
+
+    // setting the default name
+    $('.header-title').html('Feeds')
+
      $.ajax({
        type: "POST",
        url: 'https://rsstojson.udacity.com/parseFeed',
@@ -59,6 +66,9 @@ function init() {
 
                  title.html(feedName);   // Set the header text
                  container.empty();      // Empty out all previous entries
+
+                 // Animate loader off screen
+                 $(".se-pre-con").fadeOut("fast");
 
                  /* Loop through the entries we just loaded via the Google
                   * Feed Reader API. We'll then parse that entry against the
@@ -120,6 +130,9 @@ $(function() {
         var item = $(this);
 
         $('body').addClass('menu-hidden');
+        // clear previos entries // for better UI
+        $('.feed').empty();
+
         // http://api.jquery.com/jquery.data/
         loadFeed(item.data('id'));
         return false;
